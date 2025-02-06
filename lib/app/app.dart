@@ -15,9 +15,9 @@ import 'package:project/features/auth/ui/screens/update_password_screen.dart';
 import 'package:project/features/authorities/transport/student_count.dart';
 import 'package:project/features/driver/ui/screens/map_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
-import 'package:project/features/role_base_different_home/ui/screens/authority_home_screen.dart';
-import 'package:project/features/role_base_different_home/ui/screens/driver_home_screen.dart';
-import 'package:project/features/role_base_different_home/ui/screens/teacher_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/teachers/teacher_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/transport_authoroty/authority_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/drivers/driver_home_screen.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
 // import 'package:project/home/ui/screens/home_screen.dart';
 
@@ -78,11 +78,16 @@ class _ProjectState extends State<Project> {
             // Ensure the driverId is passed when navigating to MapScreen
             widget = const AuthorityHomeScreen();
           }
-
-          //todo added map part
           else if (settings.name == DriverHomeScreen.name) {
             // Ensure the driverId is passed when navigating to MapScreen
             widget = const DriverHomeScreen();
+          }
+
+          //todo added map part
+          else if (settings.name == MapScreen.name) {
+            // Ensure the driverId is passed when navigating to MapScreen
+            final String driverId = settings.arguments as String;
+            widget = MapScreen(driverId: driverId);
           }
 
 

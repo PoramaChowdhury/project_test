@@ -8,9 +8,9 @@ import 'package:project/features/home/ui/widgets/drawer_widgets.dart';
 import 'package:project/features/home/ui/widgets/grid_view_item.dart';
 import 'package:project/features/home/ui/widgets/home_app_bar.dart';
 import 'package:project/features/home/ui/widgets/home_section_header.dart';
+import 'package:project/features/role_base_different_home/ui/screens/teachers/teacher_profile_screen.dart';
+import 'package:project/features/role_base_different_home/ui/widget/role_base_bottom_nav_bar.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
-
-
 
 class TeacherHomeScreen extends StatefulWidget {
   const TeacherHomeScreen({super.key});
@@ -24,7 +24,7 @@ class TeacherHomeScreen extends StatefulWidget {
 class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
   /// todo katsi nav bar
 
- // int _currentIndex = 0;
+  int _currentIndexRoleBase = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -156,50 +156,26 @@ class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
           ),
         ),
       ),
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   // index: _bottomNavbarController.selectedIndex,
-      //   height: 60.0,
-      //   backgroundColor: Colors.transparent,
-      //   color: const Color(0xFF008080),
-      //   animationDuration: const Duration(milliseconds: 300),
-      //   items: const [
-      //     Icon(Icons.home, size: 30, color: Colors.white),
-      //     Icon(Icons.account_box_outlined, size: 30, color: Colors.white),
-      //     Icon(Icons.fitness_center_sharp, size: 30, color: Colors.white),
-      //   ],
-      //   // onTap: _bottomNavbarController.changeIndex,
-      // ),
-      /*bottomNavigationBar: BottomNavBarWidget(
-        currentIndex: _currentIndex,
-        onNavBarTapped: _onNavBarTapped,
-      ),*/
+
+      bottomNavigationBar: RoleBaseBottomNavBarWidget(
+        currentIndexRoleBase: _currentIndexRoleBase,
+        onNavBarTappedRoleBase: onNavBarTappedRoleBase,
+      ),
     );
   }
 
- /* void _onNavBarTapped(int index) async {
+  void onNavBarTappedRoleBase(int index) async {
     setState(() {
-      _currentIndex = index;
+      _currentIndexRoleBase = index;
     });
 
     if (index == 0) {
-      // Handle Home or do nothing if it's the current screen
+
     } else if (index == 1) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => const AccountScreen(),
-      //   ),
-      // );
-    } else if (index == 2) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => const TrackerScreen()),
-      // );
-    } else if (index == 3) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ProfileScreen()),
+        MaterialPageRoute(builder: (context) => const TeacherProfileScreen()),
       );
     }
-  }*/
+  }
 }
