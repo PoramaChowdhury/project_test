@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:project/features/auth/service/auth_service.dart';
 import 'package:project/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:project/features/auth/ui/widgets/app_logo_widget.dart';
@@ -63,7 +64,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const AuthAppLogoWidget(width: 100, height: 100),
               const SizedBox(height: 16),
               Text('Complete Profile',
-                  style: Theme.of(context).textTheme.titleLarge),
+                style: GoogleFonts.dynaPuff(
+                  color: Theme.of(context).textTheme.titleLarge?.color ?? Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32,
+                ),),
               Text(
                 'Get started with us with your profile',
                 style: Theme.of(context)

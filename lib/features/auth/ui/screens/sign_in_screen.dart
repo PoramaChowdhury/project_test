@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:project/app/app_colors.dart';
 import 'package:project/features/auth/service/auth_service.dart';
-import 'package:project/features/auth/ui/screens/forget_pass_phone_screen.dart';
 import 'package:project/features/auth/ui/screens/forget_password_link_screen.dart';
 import 'package:project/features/auth/ui/screens/phone_verification_screen.dart';
 import 'package:project/features/auth/ui/widgets/app_logo_widget.dart';
@@ -37,8 +37,20 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 88),
               const AuthAppLogoWidget(),
               const SizedBox(height: 24),
-              Text('Welcome!Let’s Get You In',
-                  style: Theme.of(context).textTheme.titleLarge),
+              Text('Welcome!',
+                style: GoogleFonts.dynaPuff(
+                  color: Theme.of(context).textTheme.titleLarge?.color ?? Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32,
+                ),),
+              Text(
+                'Let’s Get You In',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: Colors.grey),
+              ),
+
               const SizedBox(height: 24),
               buildForm(),
               ElevatedButton(
