@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project/features/common/ui/widgets/app_bar_logout.dart';
+import 'package:project/features/common/ui/widgets/custom_app_bar.dart';
 
 class MapScreen extends StatefulWidget {
   // final String role; // Define the role parameter
@@ -11,8 +11,8 @@ class MapScreen extends StatefulWidget {
 
   const MapScreen(
       {super.key,
-        // required this.role,
-        required this.driverId}); // Constructor with role and driverId
+      // required this.role,
+      required this.driverId}); // Constructor with role and driverId
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -74,32 +74,24 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //todo add new appbar with logout
-      appBar: const AppBarLogout(
-        title: 'Location sharing',
-      ),
-/*
-    appBar: AppBar(title: const Text('Location sharing')),
-*/
+      appBar: const CustomAppBar(title: 'Location sharing'),
       body: _currentP == null
           ? const Center(child: Text("Loading map"))
           : GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: _currentP!,
-          zoom: 19,
-        ),
-        markers: {
-          Marker(
-            markerId: MarkerId("currentLocation"),
-            position: _currentP!,
-          ),
-        },
-      ),
+              initialCameraPosition: CameraPosition(
+                target: _currentP!,
+                zoom: 19,
+              ),
+              markers: {
+                Marker(
+                  markerId: MarkerId("currentLocation"),
+                  position: _currentP!,
+                ),
+              },
+            ),
     );
   }
 }

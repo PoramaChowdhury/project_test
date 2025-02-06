@@ -15,6 +15,9 @@ import 'package:project/features/auth/ui/screens/update_password_screen.dart';
 import 'package:project/features/authorities/transport/student_count.dart';
 import 'package:project/features/driver/ui/screens/map_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/authority_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/driver_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/teacher_home_screen.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
 // import 'package:project/home/ui/screens/home_screen.dart';
 
@@ -67,22 +70,22 @@ class _ProjectState extends State<Project> {
           else if (settings.name == HomeScreen.name) {
             widget =  const HomeScreen();
           }
+          else if (settings.name == TeacherHomeScreen.name) {
+            // Ensure the driverId is passed when navigating to MapScreen
+            widget = const TeacherHomeScreen();
+          }
+          else if (settings.name == AuthorityHomeScreen.name) {
+            // Ensure the driverId is passed when navigating to MapScreen
+            widget = const AuthorityHomeScreen();
+          }
 
-
-          // // RouteSelection screen
-          // else if (settings.name == SelectRoutesScreen.name) {
-          //   widget =  SelectRoutesScreen();
-          // }
           //todo added map part
-          else if (settings.name == MapScreen.name) {
+          else if (settings.name == DriverHomeScreen.name) {
             // Ensure the driverId is passed when navigating to MapScreen
-            final String driverId = settings.arguments as String;
-            widget = MapScreen(driverId: driverId);
+            widget = const DriverHomeScreen();
           }
-          else if (settings.name == StudentCount.name) {
-            // Ensure the driverId is passed when navigating to MapScreen
-            widget = StudentCount();
-          }
+
+
 
           //todo update will use as update aND FORGET BOTH LOGIC APATOTO OFF
           else if (settings.name == UpdatePasswordScreen.name) {

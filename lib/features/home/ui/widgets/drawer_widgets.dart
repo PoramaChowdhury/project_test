@@ -121,8 +121,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             //
             //   ],
             // ),
-
-
             Row(
               mainAxisAlignment:MainAxisAlignment.center ,
               children: [
@@ -164,7 +162,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ],
             ),
           ),
-
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text(
@@ -177,7 +174,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const HomeScreen())); // Replace current screen with HomeScreen
+                      const HomeScreen()));
             },
           ),ListTile(
             leading: const Icon(Icons.home),
@@ -219,7 +216,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             title: const Text('Switch Theme'),
             onTap: _toggleTheme, // Handle the theme toggle
           ),
-          const SizedBox(height: 350), // This will work now as it's in a Column
+          const SizedBox(height: 230), // This will work now as it's in a Column
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text(

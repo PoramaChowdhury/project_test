@@ -54,9 +54,11 @@ import 'package:project/features/authorities/transport/student_count.dart';
 import 'package:project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:project/features/driver/ui/screens/map_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/authority_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/driver_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/teacher_home_screen.dart';
 // import 'package:project/features/student/transportation/ui/screens/route_select.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
-import 'package:project/features/teacher/ui/screens/teacher_select_route_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String name = '/';
@@ -87,18 +89,18 @@ class _SplashScreenState extends State<SplashScreen> {
       String role = await AuthService().getUserRole(); // Fetch the user's role (Driver, Student, etc.)
 
       if (role == 'drivers') {
-        Navigator.pushReplacementNamed(context, MapScreen.name); // Navigate to MapScreen for Driver
+        Navigator.pushReplacementNamed(context, DriverHomeScreen.name);  //todo add home testing// Navigate to MapScreen for Driver
       } else if (role == 'students')  {
         Navigator.pushReplacementNamed(context, HomeScreen.name); // Navigate to RouteSelectionScreen
       } else if ( role == 'teachers') {
         // If the role is unknown, navigate to SignInScreen
        // Navigator.pushReplacementNamed(context, SelectRoutesScreen.name);
-        Navigator.pushReplacementNamed(context, TeacherSelectRoutesScreen.name);
+        Navigator.pushReplacementNamed(context, TeacherHomeScreen.name); //todo add home testing
       }
       else if ( role == 'transports') {
         //todo check it
         //If the role is unknown, navigate to SignInScreen
-        Navigator.pushReplacementNamed(context, StudentCount.name);
+        Navigator.pushReplacementNamed(context, AuthorityHomeScreen.name); //todo add home testing
       }
     } else {
       // If not logged in, navigate to SignInScreen

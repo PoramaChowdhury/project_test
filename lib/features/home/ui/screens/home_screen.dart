@@ -155,13 +155,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'package:lottie/lottie.dart';
 import 'package:project/app/asset_path.dart';
 import 'package:project/features/account/ui/screens/profile_screen.dart';
 import 'package:project/features/ai/ui/screens/ai_screen.dart';
 import 'package:project/features/home/ui/widgets/bottom_nav_bar_widget.dart';
-
 import 'package:project/features/home/ui/widgets/custom_carousel_slider.dart';
 import 'package:project/features/home/ui/widgets/custom_carousel_slider_image.dart';
 import 'package:project/features/home/ui/widgets/drawer_widgets.dart';

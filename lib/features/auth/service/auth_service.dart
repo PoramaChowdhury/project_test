@@ -9,8 +9,10 @@ import 'package:project/features/authorities/transport/student_count.dart';
 import 'package:project/features/common/ui/widgets/custom_snakebar.dart';
 import 'package:project/features/driver/ui/screens/map_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/authority_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/driver_home_screen.dart';
+import 'package:project/features/role_base_different_home/ui/screens/teacher_home_screen.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
-import 'package:project/features/teacher/ui/screens/teacher_select_route_screen.dart';
 
 // import 'package:project/home/ui/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -214,11 +216,8 @@ class AuthService {
   // }
 
   // todo  commented for new role based singin
-  Future<void> signin(
-    String email,
-    String password,
-    BuildContext context,
-  ) async {
+
+  Future<void> signin(String email, String password, BuildContext context,) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -279,7 +278,7 @@ class AuthService {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MapScreen(driverId: userCredential.user!.uid),
+            builder: (context) => const DriverHomeScreen(), //todo add home testing
           ),
         );
       } else if (studentDoc.exists) {
@@ -297,14 +296,14 @@ class AuthService {
         //todo add route updated
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => TeacherSelectRoutesScreen()),
+          MaterialPageRoute(builder: (context) => TeacherHomeScreen()), //todo add home testing
         );
       } else if (transportDoc.exists) {
         role = 'transports';
         //todo age transport asil
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => StudentCount()),
+          MaterialPageRoute(builder: (context) => const AuthorityHomeScreen()), //todo add home testing
         );
       } else {
         //Fluttertoast.showToast(msg: "User role not found");
