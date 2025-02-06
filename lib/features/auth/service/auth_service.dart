@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 // import 'package:project/authorities/transport/student_count.dart';
 import 'package:project/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:project/features/authorities/transport/student_count.dart';
@@ -9,6 +10,8 @@ import 'package:project/features/common/ui/widgets/custom_snakebar.dart';
 import 'package:project/features/driver/ui/screens/map_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
+import 'package:project/features/teacher/ui/screens/teacher_select_route_screen.dart';
+
 // import 'package:project/home/ui/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,7 +70,8 @@ class AuthService {
     } else if (role == 'transport') {
       userCollection = FirebaseFirestore.instance.collection('transports');
     } else {
-      userCollection = FirebaseFirestore.instance.collection('users'); // Default
+      userCollection =
+          FirebaseFirestore.instance.collection('users'); // Default
     }
 
     DocumentSnapshot userDoc = await userCollection.doc(uid).get();
@@ -79,17 +83,12 @@ class AuthService {
     return userDoc.data() as Map<String, dynamic>;
   }
 
-
-
-
-
-
-
   Future<void> resetPassword(String email, BuildContext context) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
       // Show a message to the user indicating that a reset email has been sent.
-      showSnackBarMessage(context, "Password reset email sent. Check your inbox.");
+      showSnackBarMessage(
+          context, "Password reset email sent. Check your inbox.");
     } on FirebaseAuthException catch (e) {
       showSnackBarMessage(context, e.message ?? "Error sending reset email.");
     }
@@ -135,8 +134,6 @@ class AuthService {
 //       'email': userData['email'],
 //     };
 //   }*/
-
-
 
   Future<void> signup(
     String firstName,
@@ -289,13 +286,18 @@ class AuthService {
         role = 'students';
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       } else if (teacherDoc.exists) {
         role = 'teachers';
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => SelectRoutesScreen()),
+        // );
+        //todo add route updated
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SelectRoutesScreen()),
+          MaterialPageRoute(builder: (context) => TeacherSelectRoutesScreen()),
         );
       } else if (transportDoc.exists) {
         role = 'transports';
@@ -314,7 +316,7 @@ class AuthService {
       // Save the user data to SharedPreferences after successful sign-in
       await _saveUserData(userCredential.user!.uid, role);
     } on FirebaseAuthException catch (e) {
-     // Fluttertoast.showToast(msg: e.message ?? "Error occurred");
+      // Fluttertoast.showToast(msg: e.message ?? "Error occurred");
       //todo add snackbar msg
       showSnackBarMessage(context, e.message ?? "Error occurred");
     }

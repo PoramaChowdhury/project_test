@@ -56,6 +56,7 @@ import 'package:project/features/driver/ui/screens/map_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
 // import 'package:project/features/student/transportation/ui/screens/route_select.dart';
 import 'package:project/features/student/ui/screens/route_select.dart';
+import 'package:project/features/teacher/ui/screens/teacher_select_route_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String name = '/';
@@ -91,7 +92,8 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacementNamed(context, HomeScreen.name); // Navigate to RouteSelectionScreen
       } else if ( role == 'teachers') {
         // If the role is unknown, navigate to SignInScreen
-        Navigator.pushReplacementNamed(context, SelectRoutesScreen.name);
+       // Navigator.pushReplacementNamed(context, SelectRoutesScreen.name);
+        Navigator.pushReplacementNamed(context, TeacherSelectRoutesScreen.name);
       }
       else if ( role == 'transports') {
         //todo check it

@@ -120,9 +120,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     inactiveColor: AppColors.themeColor,
                     borderRadius: BorderRadius.circular(8),
                   ),
+                  //todo add clr for dark mode noit check
                   backgroundColor:
                       Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey
+                          ? const Color(0xFF121212)
                           : Colors.white,
                   keyboardType: TextInputType.number,
                   appContext: context,

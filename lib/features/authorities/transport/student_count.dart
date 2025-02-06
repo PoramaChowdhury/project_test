@@ -105,6 +105,7 @@ class _StudentCountState extends State<StudentCount> {
 }*/
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:project/features/common/ui/widgets/app_bar_logout.dart';
 import 'package:project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:project/features/common/ui/widgets/custom_app_bar.dart';
 
@@ -123,7 +124,8 @@ class _StudentCountState extends State<StudentCount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      //todo add new appbar with logout
+      appBar: const AppBarLogout(
         title: 'Transport Authority View',
       ),
       body: StreamBuilder<QuerySnapshot>(

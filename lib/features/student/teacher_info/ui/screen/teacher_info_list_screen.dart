@@ -33,21 +33,6 @@ class _TeacherInfoListScreenState extends State<TeacherInfoListScreen> {
     }
   }
 
-// Function to launch the default email client with the given email
-//   Future<void> _launchEmail(String email) async {
-//     final url = 'mailto:$email';
-//     try {
-//       // Check if the email client is available
-//       if (await canLaunch(url)) {
-//         await launch(url);
-//       } else {
-//         throw 'No email client found to open $url';
-//       }
-//     } catch (e) {
-//       print("Error launching email client: $e");
-//       // Show a message or handle accordingly
-//     }
-//   }
   Future<void> _launchEmail(String email) async {
     // Clean the email: For this example, we ensure there are no unnecessary spaces
     final String cleanedEmail = email.trim();

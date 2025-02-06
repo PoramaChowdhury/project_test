@@ -75,10 +75,13 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
                     Text(
                       item.title,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
-                        color: Colors.black,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white // Increased opacity for dark theme for better visibility
+                            : Colors.black,
+                       //color: Colors.black,
                       ),
                     ),
                   ],

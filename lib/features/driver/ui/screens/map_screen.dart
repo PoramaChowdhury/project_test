@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project/features/common/ui/widgets/app_bar_logout.dart';
 
 class MapScreen extends StatefulWidget {
   // final String role; // Define the role parameter
@@ -78,7 +79,13 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Location sharing')),
+      //todo add new appbar with logout
+      appBar: const AppBarLogout(
+        title: 'Location sharing',
+      ),
+/*
+    appBar: AppBar(title: const Text('Location sharing')),
+*/
       body: _currentP == null
           ? const Center(child: Text("Loading map"))
           : GoogleMap(
