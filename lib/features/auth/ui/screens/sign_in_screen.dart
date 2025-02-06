@@ -156,10 +156,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   return 'Password must be at least 8 characters';
                 }
                 //todo regex open kortay
-                // String passwordPattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$';
-                // if (!RegExp(passwordPattern).hasMatch(value)) {
-                //   return 'Password must include uppercase, lowercase, number, and special character';
-                // }
+                String passwordPattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$';
+                if (!RegExp(passwordPattern).hasMatch(value)) {
+                  return 'Password must include uppercase, lowercase, number, and special character';
+                }
                 return null;
               },
             ),

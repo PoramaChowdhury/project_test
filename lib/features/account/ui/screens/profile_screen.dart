@@ -8,6 +8,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project/app/asset_path.dart';
 import 'package:project/features/account/ui/screens/update_name_screen.dart';
+import 'package:project/features/ai/ui/screens/ai_bottom_nav_screen.dart';
 import 'package:project/features/auth/ui/screens/update_password_screen.dart';
 import 'package:project/features/common/ui/widgets/navbar_app_bar.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
@@ -55,7 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } else if (index == 1) {
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const AiBottomNavScreen()));
     } else if (index == 2) {
       //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } else if (index == 3) {

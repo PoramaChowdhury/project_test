@@ -63,17 +63,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 60),
               const AuthAppLogoWidget(width: 100, height: 100),
               const SizedBox(height: 16),
-              Text('Complete Profile',
+              Text('Welcome to the family!',
                 style: GoogleFonts.dynaPuff(
                   color: Theme.of(context).textTheme.titleLarge?.color ?? Colors.white,
                   fontWeight: FontWeight.w600,
-                  fontSize: 32,
+                  fontSize: 25,
                 ),),
               Text(
-                'Get started with us with your profile',
+                'Create your account and join the adventure',
                 style: Theme.of(context)
                     .textTheme
-                    .bodyLarge
+                    .bodyMedium
                     ?.copyWith(color: Colors.grey),
               ),
               const SizedBox(height: 24),

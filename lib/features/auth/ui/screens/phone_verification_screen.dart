@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:project/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:project/features/auth/ui/widgets/app_logo_widget.dart';
@@ -229,15 +230,17 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                 const SizedBox(height: 88),
                 const AuthAppLogoWidget(),
                 const SizedBox(height: 24),
+                Text('Almost there!',
+                  style: GoogleFonts.dynaPuff(
+                    color: Theme.of(context).textTheme.titleLarge?.color ?? Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 26,
+                  ),),
                 Text(
-                  'Welcome Back',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                Text(
-                  'Please enter your phone number',
+                  'Just enter your phone number to get started.',
                   style: Theme.of(context)
                       .textTheme
-                      .bodyLarge
+                      .bodyMedium
                       ?.copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 24),

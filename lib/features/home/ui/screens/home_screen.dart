@@ -158,6 +158,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project/app/asset_path.dart';
 import 'package:project/features/account/ui/screens/profile_screen.dart';
+import 'package:project/features/ai/ui/screens/ai_bottom_nav_screen.dart';
 import 'package:project/features/ai/ui/screens/ai_screen.dart';
 import 'package:project/features/home/ui/widgets/bottom_nav_bar_widget.dart';
 import 'package:project/features/home/ui/widgets/custom_carousel_slider.dart';
@@ -392,12 +393,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (index == 0) {
       // Handle Home or do nothing if it's the current screen
     } else if (index == 1) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => const AccountScreen(),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AiBottomNavScreen(),
+        ),
+      );
     } else if (index == 2) {
       // Navigator.push(
       //   context,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:project/app/app_colors.dart';
 import 'package:project/app/app_constants.dart';
@@ -98,16 +99,21 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 const SizedBox(height: 80),
                 const AuthAppLogoWidget(),
                 const SizedBox(height: 16),
+
+                Text('Verify your phone number!',
+                  style: GoogleFonts.dynaPuff(
+                    color: Theme.of(context).textTheme.titleLarge?.color ?? Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),),
                 Text(
-                  'Enter OTP Code',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  'We’ve sent you a 6 digit OTP Code code.',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.grey),
                 ),
-                Text(
-                  'A 6 Digit OTP Code has been Sent',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.grey,
-                      ),
-                ),
+
                 const SizedBox(height: 24),
                 PinCodeTextField(
                   length: 6,
