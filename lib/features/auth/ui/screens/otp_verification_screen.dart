@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:project/app/app_colors.dart';
 import 'package:project/app/app_constants.dart';
+import 'package:project/features/auth/ui/screens/phone_verification_screen.dart';
 import 'package:project/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:project/features/auth/ui/widgets/app_logo_widget.dart';
 
@@ -74,6 +75,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
+  /*void _startResendCodeTimer() {
+    _enableResendCodeButton.value = false;
+    _remainingTime.value = AppConstants.resendOtpTimeOutInSecs;
+    timer = Timer.periodic(const Duration(seconds: 1), (t) {
+      _remainingTime.value--;
+      if (_remainingTime.value == 0) {
+        t.cancel();
+        _enableResendCodeButton.value = true;
+      }
+    });
+  }*/
   void _startResendCodeTimer() {
     _enableResendCodeButton.value = false;
     _remainingTime.value = AppConstants.resendOtpTimeOutInSecs;
@@ -82,6 +94,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       if (_remainingTime.value == 0) {
         t.cancel();
         _enableResendCodeButton.value = true;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PhoneVerificationScreen(),
+          ),
+        );
       }
     });
   }
