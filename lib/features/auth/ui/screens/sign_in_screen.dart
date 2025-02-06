@@ -198,9 +198,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _onTapSigninButton() async {
     //todo test
-    /*if (!_formKey.currentState!.validate()) {
+    if (!_formKey.currentState!.validate()) {
       return;  // If form is invalid, do nothing
-    }*/
+    }
     await AuthService()
         .signin(_emailTEController.text, _passwordTEController.text, context);
   }
