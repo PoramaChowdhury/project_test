@@ -44,7 +44,7 @@ class SelectRoutesScreen extends StatelessWidget {
 */
 import 'package:flutter/material.dart';
 import 'package:project/features/common/ui/widgets/custom_app_bar.dart';
-import 'package:project/features/student/ui/screens/map_screen_student.dart';
+import 'package:project/features/student/transport/ui/screens/map_screen_student.dart';
 
 class SelectRoutesScreen extends StatelessWidget {
   final List<String> routes = ['Route 1', 'Route 2', 'Route 3', 'Route 4'];

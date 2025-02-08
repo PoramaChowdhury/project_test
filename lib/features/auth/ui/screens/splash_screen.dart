@@ -58,7 +58,6 @@ import 'package:project/features/role_base_different_home/ui/screens/teachers/te
 import 'package:project/features/role_base_different_home/ui/screens/transport_authoroty/authority_home_screen.dart';
 import 'package:project/features/role_base_different_home/ui/screens/drivers/driver_home_screen.dart';
 // import 'package:project/features/student/transportation/ui/screens/route_select.dart';
-import 'package:project/features/student/ui/screens/route_select.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String name = '/';

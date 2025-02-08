@@ -29,7 +29,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _confirmPasswordTEController =
       TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
   // Appwrite Client and Account initialization
   final Client _client = Client()
       .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
@@ -244,8 +245,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: _passwordTEController,
-              obscureText: true,
-              decoration: const InputDecoration(hintText: 'Password'),
+              obscureText: !_isPasswordVisible,
+              decoration: InputDecoration(hintText: 'Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
+              ),
               validator: (String? value) {
                 if (value?.trim().isEmpty ?? true) {
                   return 'Enter your password';
@@ -265,8 +277,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: _confirmPasswordTEController,
-              obscureText: true,
-              decoration: const InputDecoration(hintText: 'Confirm Password'),
+              obscureText: !_isConfirmPasswordVisible,
+              decoration:  InputDecoration(hintText: 'Confirm Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                    });
+                  },
+                ),
+              ),
               validator: (String? value) {
                 if (value?.trim().isEmpty ?? true) {
                   return 'Confirm your password';

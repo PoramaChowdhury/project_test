@@ -172,8 +172,9 @@ import 'package:project/features/student/pc_suggestion/screen/pc_suggestion_scre
 import 'package:project/features/student/student_assistant/calculatefee/fee.dart';
 import 'package:project/features/student/student_assistant/cgpa.dart';
 import 'package:project/features/student/teacher_info/ui/screen/teacher_info_list_screen.dart';
-import 'package:project/features/student/ui/screens/route_select.dart';
-import 'package:project/features/student/ui/screens/seat_booking_screen.dart';
+import 'package:project/features/student/transport/ui/screens/route_select.dart';
+import 'package:project/features/student/transport/ui/screens/seat_booking_screen.dart';
+
 
 // 'package:project/features/student/transportation/ui/screens/route_select.dart';
 // import 'package:project/features/student/transportation/ui/screens/seat_booking_screen.dart';

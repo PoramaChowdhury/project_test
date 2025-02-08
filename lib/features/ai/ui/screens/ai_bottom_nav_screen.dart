@@ -124,21 +124,9 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   backgroundColor: AppColors.themeColor,
-      //   title: const Text(
-      //     "Campus Guru AI ",
-      //     style: TextStyle(
-      //       fontFamily: "Poppins",
-      //       fontWeight: FontWeight.bold,
-      //       fontSize: 20,
-      //       color: AppColors.themeTextColor,
-      //     ),
-      //   ),
-      //   iconTheme: const IconThemeData(color: Colors.white),
-      // ),
+      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark
+          ? Color(0xFF121212) 
+          : Colors.white,
       appBar: const NavBarAppBar(title: 'Campus Guru Ai', automaticallyImplyLeading: false,),
       body: Column(
         children: [
@@ -151,7 +139,7 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
                 textColor: Colors.white,
                 currentUserContainerColor: Colors.grey.shade300,
                 currentUserTextColor: Colors.black,
-                containerColor: Colors.blue,
+                  containerColor:Color(0xFF66B2B2),
               ),
               readOnly: false,
               inputOptions: const InputOptions(

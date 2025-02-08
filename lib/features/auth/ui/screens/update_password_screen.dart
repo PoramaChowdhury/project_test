@@ -19,6 +19,10 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool _isCurrentPasswordVisible = false;
+  bool _isNewPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+
   Future<void> _updatePassword() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -100,8 +104,22 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
         children: [
           TextFormField(
             controller: _currentPasswordTEController,
-            obscureText: true,
-            decoration: const InputDecoration(hintText: 'Current Password'),
+            obscureText: !_isCurrentPasswordVisible,
+            decoration: InputDecoration(
+              hintText: 'Current Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isCurrentPasswordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isCurrentPasswordVisible = !_isCurrentPasswordVisible;
+                  });
+                },
+              ),
+            ),
             validator: (value) {
               if (value?.isEmpty ?? true) {
                 return 'Please enter your current password';
@@ -112,8 +130,22 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           const SizedBox(height: 8),
           TextFormField(
             controller: _newPasswordTEController,
-            obscureText: true,
-            decoration: const InputDecoration(hintText: 'New Password'),
+            obscureText: !_isNewPasswordVisible,
+            decoration: InputDecoration(
+              hintText: 'New Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isNewPasswordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isNewPasswordVisible = !_isNewPasswordVisible;
+                  });
+                },
+              ),
+            ),
             validator: (value) {
               if (value?.isEmpty ?? true) {
                 return 'Please enter a new password';
@@ -132,8 +164,21 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           const SizedBox(height: 8),
           TextFormField(
             controller: _confirmPasswordTEController,
-            obscureText: true,
-            decoration: const InputDecoration(hintText: 'Confirm New Password'),
+            decoration: InputDecoration(
+              hintText: 'Confirm New Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isConfirmPasswordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                  });
+                },
+              ),
+            ),
             validator: (value) {
               if (value?.isEmpty ?? true) {
                 return 'Please confirm your new password';

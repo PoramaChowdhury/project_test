@@ -98,21 +98,9 @@ class _AiScreenState extends State<AiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   backgroundColor: AppColors.themeColor,
-      //   title: const Text(
-      //     "Campus Guru AI ",
-      //     style: TextStyle(
-      //       fontFamily: "Poppins",
-      //       fontWeight: FontWeight.bold,
-      //       fontSize: 20,
-      //       color: AppColors.themeTextColor,
-      //     ),
-      //   ),
-      //   iconTheme: const IconThemeData(color: Colors.white),
-      // ),
+      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark
+          ? Color(0xFF121212) // Dark mode background color
+          : Colors.white,
       appBar: const CustomAppBar(title: 'Campus Guru Ai'),
       body: Column(
         children: [
@@ -125,7 +113,7 @@ class _AiScreenState extends State<AiScreen> {
                 textColor: Colors.white,
                 currentUserContainerColor: Colors.grey.shade300,
                 currentUserTextColor: Colors.black,
-                containerColor: Colors.blue,
+                containerColor:Color(0xFF66B2B2),
               ),
               readOnly: false,
               inputOptions: const InputOptions(

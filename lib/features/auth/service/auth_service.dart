@@ -11,7 +11,6 @@ import 'package:project/features/home/ui/screens/home_screen.dart';
 import 'package:project/features/role_base_different_home/ui/screens/drivers/driver_home_screen.dart';
 import 'package:project/features/role_base_different_home/ui/screens/teachers/teacher_home_screen.dart';
 import 'package:project/features/role_base_different_home/ui/screens/transport_authoroty/authority_home_screen.dart';
-import 'package:project/features/student/ui/screens/route_select.dart';
 // import 'package:project/home/ui/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

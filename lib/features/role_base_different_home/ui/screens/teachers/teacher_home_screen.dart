@@ -10,7 +10,7 @@ import 'package:project/features/home/ui/widgets/home_app_bar.dart';
 import 'package:project/features/home/ui/widgets/home_section_header.dart';
 import 'package:project/features/role_base_different_home/ui/screens/teachers/teacher_profile_screen.dart';
 import 'package:project/features/role_base_different_home/ui/widget/role_base_bottom_nav_bar.dart';
-import 'package:project/features/student/ui/screens/route_select.dart';
+import 'package:project/features/student/transport/ui/screens/route_select.dart';
 
 class TeacherHomeScreen extends StatefulWidget {
   const TeacherHomeScreen({super.key});
