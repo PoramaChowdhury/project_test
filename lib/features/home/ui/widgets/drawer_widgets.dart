@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:project/app/asset_path.dart';
 import 'package:project/features/auth/service/auth_service.dart';
 import 'package:project/features/auth/ui/screens/update_password_screen.dart';
+import 'package:project/features/home/ui/screens/about_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -20,8 +22,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   String email = '';
   String profileImageBase64 = ''; //todo  Add this line
   bool isDarkMode = false; // Track theme state
-
-
 
   @override
   void initState() {
@@ -53,11 +53,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       try {
-        Map<String, dynamic> userData = await AuthService().getUserData(user.uid);
+        Map<String, dynamic> userData =
+            await AuthService().getUserData(user.uid);
         setState(() {
           fullName = userData['firstName'] ?? '';
           email = userData['email'] ?? '';
-          profileImageBase64 = userData['profileImageBase64'] ?? ''; // Get the image Base64
+          profileImageBase64 =
+              userData['profileImageBase64'] ?? ''; // Get the image Base64
         });
       } catch (e) {
         print("Error fetching user data: $e");
@@ -88,48 +90,52 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
             ),
             child:
-            // Row(
-            //   children: [
-            //     CircleAvatar(
-            //       radius: 20,
-            //       // backgroundImage: AssetImage('assets/image/profile.jpg'), // Replace with valid path
-            //     ),
-            //     SizedBox(height: 10),
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //
-            //       children: [
-            //         Text(
-            //           fullName.isNotEmpty ? fullName : '',
-            //           style: const TextStyle(
-            //             fontFamily: 'cus',
-            //             color: Colors.white,
-            //             fontSize: 15,
-            //             fontWeight: FontWeight.bold,
-            //           ),
-            //         ),
-            //         Text(
-            //           email.isNotEmpty ? email : '',
-            //           style: const TextStyle(
-            //               fontFamily: 'cus',
-            //               color: Colors.black,
-            //               fontSize: 10
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //
-            //   ],
-            // ),
-            Row(
-              mainAxisAlignment:MainAxisAlignment.center ,
+                // Row(
+                //   children: [
+                //     CircleAvatar(
+                //       radius: 20,
+                //       // backgroundImage: AssetImage('assets/image/profile.jpg'), // Replace with valid path
+                //     ),
+                //     SizedBox(height: 10),
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //
+                //       children: [
+                //         Text(
+                //           fullName.isNotEmpty ? fullName : '',
+                //           style: const TextStyle(
+                //             fontFamily: 'cus',
+                //             color: Colors.white,
+                //             fontSize: 15,
+                //             fontWeight: FontWeight.bold,
+                //           ),
+                //         ),
+                //         Text(
+                //           email.isNotEmpty ? email : '',
+                //           style: const TextStyle(
+                //               fontFamily: 'cus',
+                //               color: Colors.black,
+                //               fontSize: 10
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //
+                //   ],
+                // ),
+                Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar( // Use CircleAvatar to display the image
+                CircleAvatar(
+                  // Use CircleAvatar to display the image
                   backgroundColor: Colors.white,
                   radius: 30, // Increased radius for better visibility
-                  backgroundImage: profileImageBase64.isNotEmpty // Check if it's not empty
-                      ? MemoryImage(base64Decode(profileImageBase64)) as ImageProvider
-                      : const AssetImage(AssetsPath.defaultProfileImage) as ImageProvider,
+                  backgroundImage:
+                      profileImageBase64.isNotEmpty // Check if it's not empty
+                          ? MemoryImage(base64Decode(profileImageBase64))
+                              as ImageProvider
+                          : const AssetImage(AssetsPath.defaultProfileImage)
+                              as ImageProvider,
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -170,13 +176,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             onTap: () {
               Navigator.pop(context); // Close the drawer first
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                      const HomeScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
-          ),ListTile(
+          ),
+          ListTile(
             leading: const Icon(Icons.home),
             title: const Text(
               'Change Your Password',
@@ -192,16 +196,24 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                      const UpdatePasswordScreen()));
+                      builder: (context) => const UpdatePasswordScreen()));
             },
           ),
-          const ListTile(
-            leading: Icon(Icons.info),
-            title: Text(
-              'About US!',
+           ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text(
+              'About!',
               style: TextStyle(fontFamily: 'cus'),
             ),
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AboutScreen(), // Navigate to AboutUsScreen
+                ),
+              );
+            },
           ),
           const ListTile(
             leading: Icon(Icons.help_center_outlined),
@@ -229,6 +241,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             },
           ),
           const Divider(),
+          IconButton(
+            icon: const Icon(
+              Icons.video_library, // YouTube icon
+              color: Colors.red, // YouTube color
+              size: 30, // Adjust size
+            ),
+            onPressed: () async {
+              const url =
+                  'https://www.youtube.com/channel/your_channel_id'; // todo add channel id
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
         ],
       ),
     );

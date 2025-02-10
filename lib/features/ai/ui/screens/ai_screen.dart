@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:get/get.dart';
@@ -17,8 +16,10 @@ class AiScreen extends StatefulWidget {
 
 class _AiScreenState extends State<AiScreen> {
   late final GenerativeModel generativeModel;
-  final ChatUser currentUser = ChatUser(id: "1", firstName: "ii", lastName: "s");
-  final ChatUser gptUser = ChatUser(id: "2", firstName: "Campus", lastName: "Guru");
+  final ChatUser currentUser =
+      ChatUser(id: "1", firstName: "ii", lastName: "s");
+  final ChatUser gptUser =
+      ChatUser(id: "2", firstName: "Campus", lastName: "Guru");
 
   List<ChatMessage> messageList = <ChatMessage>[];
   List<ChatUser> typingUsers = <ChatUser>[];
@@ -30,7 +31,7 @@ class _AiScreenState extends State<AiScreen> {
     // Initialize the GenerativeModel
     generativeModel = GenerativeModel(
       model: 'gemini-1.5-flash-latest', // Adjust this model if needed
-      apiKey: AiApiPath.chatbotPostApi,  // Make sure you have the right API key
+      apiKey: AiApiPath.chatbotPostApi, // Make sure you have the right API key
     );
   }
 
@@ -97,10 +98,14 @@ class _AiScreenState extends State<AiScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark
+      /*backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark
           ? Color(0xFF121212) // Dark mode background color
-          : Colors.white,
+          : Colors.white,*/
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
       appBar: const CustomAppBar(title: 'Campus Guru Ai'),
       body: Column(
         children: [
@@ -110,17 +115,37 @@ class _AiScreenState extends State<AiScreen> {
               currentUser: currentUser,
               typingUsers: typingUsers,
               messageOptions: MessageOptions(
-                textColor: Colors.white,
+                /*textColor: Colors.white,
                 currentUserContainerColor: Colors.grey.shade300,
                 currentUserTextColor: Colors.black,
-                containerColor:Color(0xFF66B2B2),
+                containerColor:Color(0xFF66B2B2),*/
+                textColor: isDarkMode ? Colors.white : Colors.black,
+                // Set text color based on mode
+                currentUserContainerColor: Colors.grey.shade500,
+                currentUserTextColor: isDarkMode ? Colors.black : Colors.white,
+                // Adjust text color for the current user
+                containerColor: const Color(0xFF66B2B2),
               ),
               readOnly: false,
+/*
               inputOptions: const InputOptions(
                 autocorrect: true,
                 alwaysShowSend: false,
                 cursorStyle: CursorStyle(
                   color: Colors.grey,
+                ),
+              ),
+*/
+              inputOptions: InputOptions(
+                autocorrect: true,
+                alwaysShowSend: false,
+                cursorStyle: CursorStyle(
+                  color: isDarkMode
+                      ? Colors.white
+                      : Colors.black, // Set cursor color
+                ),
+                inputDecoration: const InputDecoration(
+                  hintText: 'Type a message...', // Set the hint text
                 ),
               ),
               onSend: (ChatMessage msg) {
@@ -134,6 +159,3 @@ class _AiScreenState extends State<AiScreen> {
     );
   }
 }
-
-
-

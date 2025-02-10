@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/app/app_colors.dart';
 import 'package:project/features/common/ui/widgets/custom_snakebar.dart';
+import 'package:project/features/student/student_assistant/cgpa/data/model/semester.dart';
+import 'package:project/features/student/student_assistant/cgpa/ui/screens/predict_cgpa_screen.dart';
+import 'package:project/features/student/student_assistant/cgpa/ui/widgets/semester_widget.dart';
 
 class CgpaCalculatorWithUid extends StatefulWidget {
   const CgpaCalculatorWithUid({super.key});
@@ -87,6 +89,56 @@ class _CgpaCalculatorWithUidState extends State<CgpaCalculatorWithUid> {
     );
   }
 
+  //todo  Navigate to the prediction screen
+  void _navigateToPredictScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PredictScreen(
+          existingSemesters: _semesters,
+        ),
+      ),
+    );
+  }
+
+  // Calculate CGPA with the predicted semester
+/*
+  void _predictCGPA(List<Course> predictedCourses) {
+    double totalCredits = 0;
+    double totalPoints = 0;
+
+    for (var semester in _semesters) {
+      totalCredits += semester.totalCredits;
+      totalPoints += semester.totalPoints;
+    }
+
+    // Add the predicted semester's courses to the calculation
+    for (var course in predictedCourses) {
+      totalCredits += course.credit;
+      totalPoints += (course.credit * course.cg);
+    }
+
+    double cgpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Predicted CGPA'),
+          content: Text('Your predicted CGPA is: ${cgpa.toStringAsFixed(2)}'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+*/
+//todo added predict
+
   // Save the data to Firebase Firestore based on UID
   void _saveDataToFirebase() async {
     String? userId = await _getUserId();
@@ -115,14 +167,10 @@ class _CgpaCalculatorWithUidState extends State<CgpaCalculatorWithUid> {
       });
     }
 
-    /*ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Data saved successfully!')),
-    );*/
     //todo called getx used snackbar
     showSnackBarMessage(context,'Data saved successfully!');
   }
 
-  // Delete a semester both locally and in Firestore
   void _deleteSemester(int index) async {
     String? userId = await _getUserId();
     if (userId == null) return;
@@ -138,9 +186,6 @@ class _CgpaCalculatorWithUidState extends State<CgpaCalculatorWithUid> {
       _semesters.removeAt(index);
     });
 
-    /*ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Semester deleted successfully!')),
-    );*/
     //todo called getx used snackbar
     showSnackBarMessage(context,'Semester deleted successfully!');
   }
@@ -153,14 +198,14 @@ class _CgpaCalculatorWithUidState extends State<CgpaCalculatorWithUid> {
         title: const Text('CGPA Calculator'),
         centerTitle: true,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Color(0xFF66B2B2),
                 Color(0xFF66B2B2),
               ],
             ),
-            borderRadius: const BorderRadius.vertical(
+            borderRadius: BorderRadius.vertical(
               bottom: Radius.elliptical(11, 11),
             ),
           ),
@@ -198,11 +243,19 @@ class _CgpaCalculatorWithUidState extends State<CgpaCalculatorWithUid> {
                       child: const Text('Add Semester'),
                     ),
                   ),
-                  const SizedBox(width: 15),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: _calculateCGPA,
                       child: const Text('Calculate CGPA'),
+                    ),
+                  ),
+
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _navigateToPredictScreen,
+                      child: const Text('Predict CGPA'),
                     ),
                   ),
                 ],
@@ -215,20 +268,6 @@ class _CgpaCalculatorWithUidState extends State<CgpaCalculatorWithUid> {
   }
 }
 
-class Semester {
-  final List<Course> courses = [];
-
-  void addCourse(String name, double credit, double cg) {
-    courses.add(Course(name, credit, cg));
-  }
-
-  double get totalCredits => courses.fold(0, (sum, course) => sum + course.credit);
-
-  double get totalPoints => courses.fold(0, (sum, course) => sum + (course.credit * course.cg));
-
-  double get gpa => totalCredits > 0 ? totalPoints / totalCredits : 0;
-}
-
 class Course {
   final String name;
   final double credit;
@@ -237,126 +276,5 @@ class Course {
   Course(this.name, this.credit, this.cg);
 }
 
-class SemesterWidget extends StatefulWidget {
-  final int semesterNumber;
-  final Semester semester;
-  final VoidCallback onRemoveSemester;
 
-  const SemesterWidget({
-    Key? key,
-    required this.semesterNumber,
-    required this.semester,
-    required this.onRemoveSemester,
-  }) : super(key: key);
 
-  @override
-  State<SemesterWidget> createState() => _SemesterWidgetState();
-}
-
-class _SemesterWidgetState extends State<SemesterWidget> {
-  final TextEditingController courseNameController = TextEditingController();
-  final TextEditingController courseCreditController = TextEditingController();
-  final TextEditingController courseGradeController = TextEditingController();
-
-  void _addCourse() {
-    if (courseNameController.text.isNotEmpty &&
-        courseCreditController.text.isNotEmpty &&
-        courseGradeController.text.isNotEmpty) {
-      double credit = double.parse(courseCreditController.text);
-      double cg = double.parse(courseGradeController.text);
-
-      widget.semester.addCourse(courseNameController.text, credit, cg);
-
-      // Clear the text fields after adding
-      courseNameController.clear();
-      courseCreditController.clear();
-      courseGradeController.clear();
-
-      setState(() {});
-    }
-  }
-
-  void _removeCourse(int index) {
-    setState(() {
-      widget.semester.courses.removeAt(index);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.themeColor.withOpacity(0.2),
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Semester ${widget.semesterNumber}',
-                    style: const TextStyle(fontSize: 18)),
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: widget.onRemoveSemester,
-                ),
-              ],
-            ),
-            ...widget.semester.courses.asMap().entries.map((entry) {
-              int index = entry.key;
-              Course course = entry.value;
-              return ListTile(
-                title: Text(course.name),
-                subtitle: Text(
-                    'Credits: ${course.credit}, Grade Point (CG): ${course.cg}'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.remove_circle),
-                  onPressed: () => _removeCourse(index),
-                ),
-              );
-            }).toList(),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                      controller: courseNameController,
-                      decoration: const InputDecoration(hintText: 'Course Name')),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                      controller: courseCreditController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(hintText: 'Course Credit'),
-                      onSubmitted: (_) => _addCourse()),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                      controller: courseGradeController,
-                      keyboardType: TextInputType.number,
-                      decoration:
-                      const InputDecoration(hintText: 'Grade Point'),
-                      onSubmitted: (_) => _addCourse()),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add),
-                  onPressed: _addCourse,
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  'GPA for this semester is ${widget.semester.gpa.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

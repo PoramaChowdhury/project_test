@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:get/get.dart';
@@ -13,8 +12,9 @@ import 'package:project/features/home/ui/screens/home_screen.dart';
 import 'package:project/features/home/ui/widgets/bottom_nav_bar_widget.dart';
 
 class AiBottomNavScreen extends StatefulWidget {
-
-  const AiBottomNavScreen({super.key, });
+  const AiBottomNavScreen({
+    super.key,
+  });
 
   @override
   State<AiBottomNavScreen> createState() => _AiBottomNavScreenState();
@@ -24,8 +24,10 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
   int _currentIndex = 1;
 
   late final GenerativeModel generativeModel;
-  final ChatUser currentUser = ChatUser(id: "1", firstName: "ii", lastName: "s");
-  final ChatUser gptUser = ChatUser(id: "2", firstName: "Campus", lastName: "Guru");
+  final ChatUser currentUser =
+      ChatUser(id: "1", firstName: "ii", lastName: "s");
+  final ChatUser gptUser =
+      ChatUser(id: "2", firstName: "Campus", lastName: "Guru");
 
   List<ChatMessage> messageList = <ChatMessage>[];
   List<ChatUser> typingUsers = <ChatUser>[];
@@ -37,7 +39,7 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
     // Initialize the GenerativeModel
     generativeModel = GenerativeModel(
       model: 'gemini-1.5-flash-latest', // Adjust this model if needed
-      apiKey: AiApiPath.chatbotPostApi,  // Make sure you have the right API key
+      apiKey: AiApiPath.chatbotPostApi, // Make sure you have the right API key
     );
   }
 
@@ -102,7 +104,6 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
     }
   }
 
-
   void _onNavBarTapped(int index) async {
     setState(() {
       _currentIndex = index;
@@ -116,18 +117,26 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
     } else if (index == 2) {
       //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } else if (index == 3) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const ProfileScreen()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark
-          ? Color(0xFF121212) 
-          : Colors.white,
-      appBar: const NavBarAppBar(title: 'Campus Guru Ai', automaticallyImplyLeading: false,),
+      // backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark
+      //     ? Color(0xFF121212)
+      //     : Colors.white,
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
+
+      appBar: const NavBarAppBar(
+        title: 'Campus Guru Ai',
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
         children: [
           // Chat Interface
@@ -136,17 +145,33 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
               currentUser: currentUser,
               typingUsers: typingUsers,
               messageOptions: MessageOptions(
-                textColor: Colors.white,
-                currentUserContainerColor: Colors.grey.shade300,
-                currentUserTextColor: Colors.black,
-                  containerColor:Color(0xFF66B2B2),
+                // textColor: Colors.white,
+                // currentUserContainerColor: Colors.grey.shade300,
+                // currentUserTextColor: Colors.black,
+                textColor: isDarkMode ? Colors.white : Colors.black,
+                currentUserContainerColor: Colors.grey.shade500,
+                currentUserTextColor: isDarkMode ? Colors.black : Colors.white,
+                // Adjust text color for the current user
+                containerColor: const Color(0xFF66B2B2),
               ),
               readOnly: false,
-              inputOptions: const InputOptions(
+              /*inputOptions: const InputOptions(
                 autocorrect: true,
                 alwaysShowSend: false,
                 cursorStyle: CursorStyle(
                   color: Colors.grey,
+                ),
+              ),*/
+              inputOptions: InputOptions(
+                autocorrect: true,
+                alwaysShowSend: false,
+                cursorStyle: CursorStyle(
+                  color: isDarkMode
+                      ? Colors.white
+                      : Colors.black, // Set cursor color
+                ),
+                inputDecoration: const InputDecoration(
+                  hintText: 'Type a message...', // Set the hint text
                 ),
               ),
               onSend: (ChatMessage msg) {
@@ -155,7 +180,9 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
               messages: messageList,
             ),
           ),
-          const SizedBox(height: 15,)
+          const SizedBox(
+            height: 15,
+          )
         ],
       ),
       bottomNavigationBar: BottomNavBarWidget(
@@ -165,6 +192,3 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
     );
   }
 }
-
-
-
