@@ -9,11 +9,11 @@ class SemesterWidget extends StatefulWidget {
   final VoidCallback onRemoveSemester;
 
   const SemesterWidget({
-    Key? key,
+    super.key,
     required this.semesterNumber,
     required this.semester,
     required this.onRemoveSemester,
-  }) : super(key: key);
+  });
 
   @override
   State<SemesterWidget> createState() => _SemesterWidgetState();
@@ -69,13 +69,18 @@ class _SemesterWidgetState extends State<SemesterWidget> {
                 ),
               ],
             ),
-            ...widget.semester.courses.asMap().entries.map((entry) {
+            ...widget.semester.courses
+                .asMap()
+                .entries
+                .map((entry) {
               int index = entry.key;
               Course course = entry.value;
               return ListTile(
-                title: Text(course.name),
+                title: Text(course.name, style: const TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.w700,),),
                 subtitle: Text(
-                    'Credits: ${course.credit}, Grade Point (CG): ${course.cg}'),
+                  'Credits: ${course.credit}, Grade Point (CG): ${course.cg}',
+                  style: const TextStyle(fontSize: 16,),),
                 trailing: IconButton(
                   icon: const Icon(Icons.remove_circle),
                   onPressed: () => _removeCourse(index),
@@ -86,15 +91,36 @@ class _SemesterWidgetState extends State<SemesterWidget> {
               children: [
                 Expanded(
                   child: TextField(
-                      controller: courseNameController,
-                      decoration: const InputDecoration(hintText: 'Course Name')),
+                    controller: courseNameController,
+                    decoration: InputDecoration(
+                      hintText: 'Course Name',
+                      hintStyle: const TextStyle(
+                        fontSize: 12, // Set font size of hint text
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
                       controller: courseCreditController,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(hintText: 'Course Credit'),
+                      decoration: InputDecoration(
+                        hintText: 'Course Credit',
+                        hintStyle: const TextStyle(
+                          fontSize: 12, // Set font size of hint text
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                       onSubmitted: (_) => _addCourse()),
                 ),
                 const SizedBox(width: 8),
@@ -102,8 +128,17 @@ class _SemesterWidgetState extends State<SemesterWidget> {
                   child: TextField(
                       controller: courseGradeController,
                       keyboardType: TextInputType.number,
-                      decoration:
-                      const InputDecoration(hintText: 'Grade Point'),
+                      decoration: InputDecoration(
+                        hintText: 'Grade Point',
+                        hintStyle: const TextStyle(
+                          fontSize: 12, // Set font size of hint text
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                       onSubmitted: (_) => _addCourse()),
                 ),
                 IconButton(
@@ -116,7 +151,8 @@ class _SemesterWidgetState extends State<SemesterWidget> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                  'GPA for this semester is ${widget.semester.gpa.toStringAsFixed(2)}',
+                  'GPA for this semester is ${widget.semester.gpa
+                      .toStringAsFixed(2)}',
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold)),
             ),
