@@ -77,6 +77,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -129,7 +131,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 CircleAvatar(
                   // Use CircleAvatar to display the image
                   backgroundColor: Colors.white,
-                  radius: 30, // Increased radius for better visibility
+                  //radius: 30, // Increased radius for better visibility
+                  radius: screenWidth * 0.1, // Increased radius for better visibility
                   backgroundImage:
                       profileImageBase64.isNotEmpty // Check if it's not empty
                           ? MemoryImage(base64Decode(profileImageBase64))
@@ -228,7 +231,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             title: const Text('Switch Theme'),
             onTap: _toggleTheme, // Handle the theme toggle
           ),
-          const SizedBox(height: 230), // This will work now as it's in a Column
+         // const SizedBox(height: 230), // This will work now as it's in a Column
+          SizedBox(height: screenHeight * 0.2),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text(
