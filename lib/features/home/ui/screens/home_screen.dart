@@ -169,6 +169,7 @@ import 'package:project/features/home/ui/widgets/home_app_bar.dart';
 import 'package:project/features/home/ui/widgets/home_section_header.dart';
 import 'package:project/features/student/alumni_info/ui/screen/alumni_list_screen.dart';
 import 'package:project/features/student/pc_suggestion/screen/pc_suggestion_screen.dart';
+import 'package:project/features/student/resource_link/ui/screens/resource_link_screen.dart';
 import 'package:project/features/student/student_assistant/calculatefee/ui/screens/fee.dart';
 import 'package:project/features/student/student_assistant/cgpa/ui/screens/cgpa.dart';
 import 'package:project/features/student/teacher_info/ui/screen/teacher_info_list_screen.dart';
@@ -348,13 +349,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     case 3:
                       return GridViewItem(
                         icon: Lottie.asset(AssetsPath.busIcon),
-                        label: 'Achievement',
-                        onTap: () {},
+                        label: 'Resource',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ResourceLinkScreen()));
+                        },
                       );
                     case 4:
                       return GridViewItem(
                         icon: Lottie.asset(AssetsPath.busIcon),
-                        label: 'Resource',
+                        label: 'Achievement',
                         onTap: () { },
                       );
                     default:

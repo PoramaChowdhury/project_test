@@ -7,6 +7,7 @@ import 'package:project/app/asset_path.dart';
 import 'package:project/features/auth/service/auth_service.dart';
 import 'package:project/features/auth/ui/screens/update_password_screen.dart';
 import 'package:project/features/home/ui/screens/about_screen.dart';
+import 'package:project/features/home/ui/screens/help_screen.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -206,7 +207,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             leading: const Icon(Icons.info),
             title: const Text(
               'About!',
-              style: TextStyle(fontFamily: 'cus'),
             ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
@@ -218,12 +218,20 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               );
             },
           ),
-          const ListTile(
+           ListTile(
             leading: Icon(Icons.help_center_outlined),
-            title: Text(
+            title: const Text(
               'Help!',
-              style: TextStyle(fontFamily: 'cus'),
             ),
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HelpScreen(), // Navigate to AboutUsScreen
+                ),
+              );
+            },
           ),
 
           ListTile(
