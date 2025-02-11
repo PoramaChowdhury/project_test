@@ -46,7 +46,7 @@ class _SeatBookingScreenState extends State<SeatBookingScreen> {
 
 
   // Function to select the date
-  void _selectDate() async {
+  /*void _selectDate() async {
     final DateTime currentDate = DateTime.now();
     final DateTime maxDate =
     currentDate.add(Duration(days: 7)); // Maximum one week ahead
@@ -74,6 +74,35 @@ class _SeatBookingScreenState extends State<SeatBookingScreen> {
       setState(() {
         selectedDate = picked;
       });
+  }*/
+  //todo used for next 7 days
+  void _selectDate() async {
+    final DateTime currentDate = DateTime.now();
+    final DateTime firstSelectableDate = currentDate.add(const Duration(days: 1)); // Start from tomorrow
+    final DateTime lastSelectableDate = firstSelectableDate.add(const Duration(days: 6)); // 7 days from tomorrow
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate ?? firstSelectableDate, // Show tomorrow as the initial date
+      firstDate: firstSelectableDate, // Prevent selecting a date before tomorrow
+      lastDate: lastSelectableDate, // Prevent selecting a date beyond 7 days from tomorrow
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: AppColors.themeColor,
+            hintColor: AppColors.themeColor,
+            buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 
   // Function to book a seat

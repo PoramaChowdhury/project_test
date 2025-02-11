@@ -13,6 +13,7 @@ import 'package:project/features/auth/ui/screens/update_password_screen.dart';
 import 'package:project/features/common/ui/widgets/navbar_app_bar.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
 import 'package:project/features/home/ui/widgets/bottom_nav_bar_widget.dart';
+import 'package:project/features/student/classroom_finder/ui/screen/classroom_finder_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -59,9 +60,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const AiBottomNavScreen()));
     } else if (index == 2) {
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ClassRoomFinderScreen()));
     } else if (index == 3) {
-      // Account is already the current screen, no action required
+      //  already the current screen so no action need
     }
   }
 

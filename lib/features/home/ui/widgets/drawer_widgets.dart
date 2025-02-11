@@ -240,7 +240,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             onTap: _toggleTheme, // Handle the theme toggle
           ),
          // const SizedBox(height: 230), // This will work now as it's in a Column
-          SizedBox(height: screenHeight * 0.2),
+          SizedBox(height: screenHeight * 0.23),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text(
@@ -261,7 +261,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             onPressed: () async {
               const url =
-                  'https://www.youtube.com/channel/your_channel_id'; // todo add channel id
+                  'https://youtube.com/@ibzzzzcreation2035?si=LqsbrjASWrVDZYMV'; // todo add channel id
               if (await canLaunch(url)) {
                 await launch(url);
               } else {

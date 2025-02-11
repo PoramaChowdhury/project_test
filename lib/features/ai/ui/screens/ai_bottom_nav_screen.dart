@@ -10,6 +10,7 @@ import 'package:project/features/common/ui/widgets/custom_app_bar.dart';
 import 'package:project/features/common/ui/widgets/navbar_app_bar.dart';
 import 'package:project/features/home/ui/screens/home_screen.dart';
 import 'package:project/features/home/ui/widgets/bottom_nav_bar_widget.dart';
+import 'package:project/features/student/classroom_finder/ui/screen/classroom_finder_screen.dart';
 
 class AiBottomNavScreen extends StatefulWidget {
   const AiBottomNavScreen({
@@ -113,9 +114,9 @@ class _AiBottomNavScreenState extends State<AiBottomNavScreen> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } else if (index == 1) {
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+
     } else if (index == 2) {
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ClassRoomFinderScreen()));
     } else if (index == 3) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const ProfileScreen()));

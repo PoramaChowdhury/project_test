@@ -168,6 +168,7 @@ import 'package:project/features/home/ui/widgets/grid_view_item.dart';
 import 'package:project/features/home/ui/widgets/home_app_bar.dart';
 import 'package:project/features/home/ui/widgets/home_section_header.dart';
 import 'package:project/features/student/alumni_info/ui/screen/alumni_list_screen.dart';
+import 'package:project/features/student/classroom_finder/ui/screen/classroom_finder_screen.dart';
 import 'package:project/features/student/pc_suggestion/screen/pc_suggestion_screen.dart';
 import 'package:project/features/student/resource_link/ui/screens/resource_link_screen.dart';
 import 'package:project/features/student/student_assistant/calculatefee/ui/screens/fee.dart';
@@ -213,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 2,
@@ -288,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AiScreen()));
+                                  builder: (context) =>   AiScreen()));
                         },
                       );
                     default:
@@ -305,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 2,
@@ -327,17 +328,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     case 1:
                       return GridViewItem(
                         icon: Lottie.asset(AssetsPath.pcInfo),
-                        label: 'PcSuggestion',
+                        label: 'PC Builder',
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PcSuggestionScreen()));
+                                  builder: (context) => const PcSuggestionScreen()));
                         },
                       );
                     case 2:
                       return GridViewItem(
-                        icon: Lottie.asset(AssetsPath.busIcon),
+                        icon: Lottie.asset(AssetsPath.alumniInfo,width: 90,height: 90),
                         label: 'Alumni Info',
                         onTap: () {
                           Navigator.push(
@@ -348,7 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     case 3:
                       return GridViewItem(
-                        icon: Lottie.asset(AssetsPath.busIcon),
+                        icon: Lottie.asset(AssetsPath.resourceLink),
                         label: 'Resource',
                         onTap: () {
                           Navigator.push(
@@ -359,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     case 4:
                       return GridViewItem(
-                        icon: Lottie.asset(AssetsPath.busIcon),
+                        icon: Lottie.asset(AssetsPath.achievement),
                         label: 'Achievement',
                         onTap: () { },
                       );
@@ -372,19 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   // index: _bottomNavbarController.selectedIndex,
-      //   height: 60.0,
-      //   backgroundColor: Colors.transparent,
-      //   color: const Color(0xFF008080),
-      //   animationDuration: const Duration(milliseconds: 300),
-      //   items: const [
-      //     Icon(Icons.home, size: 30, color: Colors.white),
-      //     Icon(Icons.account_box_outlined, size: 30, color: Colors.white),
-      //     Icon(Icons.fitness_center_sharp, size: 30, color: Colors.white),
-      //   ],
-      //   // onTap: _bottomNavbarController.changeIndex,
-      // ),
+
       bottomNavigationBar: BottomNavBarWidget(
         currentIndex: _currentIndex,
         onNavBarTapped: _onNavBarTapped,
@@ -398,21 +387,21 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     if (index == 0) {
-      // Handle Home or do nothing if it's the current screen
+
     } else if (index == 1) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const AiBottomNavScreen(),
         ),
       );
     } else if (index == 2) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => const TrackerScreen()),
-      // );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ClassRoomFinderScreen()),
+      );
     } else if (index == 3) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const ProfileScreen()),
       );
