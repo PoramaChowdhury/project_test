@@ -179,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return 'Enter your mobile number';
                 }
                 //todo pohn tik kortam
-                if (RegExp(r"^\+880\d{10}$").hasMatch(value!) == false) {
+                if (RegExp(r"^\+8801[3-9]\d{8}$").hasMatch(value!) == false) {
                   return 'Enter valid mobile number';
                 }
                 return null;
@@ -190,7 +190,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: _emailTEController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(hintText: 'Email'),
+              decoration: const InputDecoration(hintText: 'University email'),
               validator: (String? value) {
                 if (value?.trim().isEmpty ?? true) {
                   return 'Enter your email';

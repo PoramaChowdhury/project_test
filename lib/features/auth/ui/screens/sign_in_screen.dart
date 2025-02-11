@@ -119,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: _emailTEController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(hintText: 'Email'),
+              decoration: const InputDecoration(hintText: 'University email'),
               validator: (String? value) {
                 if (value?.trim().isEmpty ?? true) {
                   return 'Enter your email';
