@@ -34,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // Appwrite Client and Account initialization
   final Client _client = Client()
       .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
-      .setProject('6787c8cb000919c242c8'); // Your Project ID
+      .setProject('66fd1a00002225a578d3'); // Your Project ID
 
   late final Account _account; // Declare the Account instance
 

@@ -185,7 +185,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
     super.initState();
     _client = Client()
         .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
-        .setProject('6787c8cb000919c242c8'); // Your Project ID
+        .setProject('66fd1a00002225a578d3'); // Your Project ID
     _account = Account(_client);
   }
 
