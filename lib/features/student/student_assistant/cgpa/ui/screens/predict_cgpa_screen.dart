@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project/features/common/ui/widgets/custom_app_bar.dart';
 import 'package:project/features/student/student_assistant/cgpa/data/model/semester.dart';
 import 'package:project/features/student/student_assistant/cgpa/ui/screens/cgpa.dart';
 
 class PredictScreen extends StatefulWidget {
   final List<Semester> existingSemesters;
 
-  const PredictScreen({Key? key, required this.existingSemesters}) : super(key: key);
+  const PredictScreen({Key? key, required this.existingSemesters})
+      : super(key: key);
 
   @override
   State<PredictScreen> createState() => _PredictScreenState();
@@ -34,7 +36,8 @@ class _PredictScreenState extends State<PredictScreen> {
       Semester semester = Semester();
       List<dynamic> courses = doc['courses'];
       for (var course in courses) {
-        semester.addCourse(course['name'], course['credit'], course['gradePoint']);
+        semester.addCourse(
+            course['name'], course['credit'], course['gradePoint']);
       }
       widget.existingSemesters.add(semester);
     }
@@ -52,7 +55,6 @@ class _PredictScreenState extends State<PredictScreen> {
         _predictedCourses.add(Course(courseNameController.text, credit, cg));
       });
 
-      // Clear the text fields
       courseNameController.clear();
       courseCreditController.clear();
       courseGradeController.clear();
@@ -63,7 +65,6 @@ class _PredictScreenState extends State<PredictScreen> {
     double totalCredits = 0;
     double totalPoints = 0;
 
-    // Calculate CGPA from existing semesters
     for (var semester in widget.existingSemesters) {
       totalCredits += semester.totalCredits;
       totalPoints += semester.totalPoints;
@@ -97,9 +98,7 @@ class _PredictScreenState extends State<PredictScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Predict CGPA'),
-      ),
+      appBar: const CustomAppBar(title: 'Predict CGPA'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -123,7 +122,14 @@ class _PredictScreenState extends State<PredictScreen> {
                 Expanded(
                   child: TextField(
                     controller: courseNameController,
-                    decoration: const InputDecoration(hintText: 'Course Name'),
+                    decoration:  InputDecoration(hintText: 'Course Name',hintStyle: const TextStyle(
+                      fontSize: 12, // Set font size of hint text
+                    ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -131,7 +137,15 @@ class _PredictScreenState extends State<PredictScreen> {
                   child: TextField(
                     controller: courseCreditController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(hintText: 'Course Credit'),
+                    decoration:
+                         InputDecoration(hintText: 'Course Credit',hintStyle: const TextStyle(
+                           fontSize: 12, // Set font size of hint text
+                         ),
+                           contentPadding: const EdgeInsets.symmetric(
+                               vertical: 12, horizontal: 10),
+                           border: OutlineInputBorder(
+                             borderRadius: BorderRadius.circular(8),
+                           ),),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -139,7 +153,14 @@ class _PredictScreenState extends State<PredictScreen> {
                   child: TextField(
                     controller: courseGradeController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(hintText: 'Grade Point'),
+                    decoration:  InputDecoration(hintText: 'Grade Point',hintStyle: const TextStyle(
+                      fontSize: 12, // Set font size of hint text
+                    ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),),
                   ),
                 ),
                 IconButton(

@@ -248,9 +248,10 @@ class _SeatBookingScreenState extends State<SeatBookingScreen> {
                             fontSize: 16,
                             color: selectedDate == null
                                 ? AppColors.themeColor
-                                : Colors.black,
+                                : (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
                           ),
                         ),
+
                       ),
                     ),
                   ],

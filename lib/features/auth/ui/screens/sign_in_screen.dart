@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: const Text(
                         'Forget your password?',
                         style:
-                        TextStyle(letterSpacing: 0.5, color: Colors.grey),
+                        TextStyle(letterSpacing: 0.5, color: AppColors.themeColor),
                       ),
                     ),
                     _buildSignUpSection(),
